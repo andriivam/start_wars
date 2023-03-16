@@ -5,13 +5,11 @@ import Loading from '../Loader/Loader.jsx';
 
 export default function ItemList({ selectedPersonId }) {
 
-
     const [peopleList, setPeopleList] = useState(null);
 
-
-    const getAllPeople = async (url) => {
+    const getAllPeople = async () => {
         try {
-            const res = await fetch(url)
+            const res = await fetch(`https://swapi.dev/api/people/`)
             const data = await res.json();
             const results = data.results;
             const ids = results.map((item) => {
@@ -27,7 +25,7 @@ export default function ItemList({ selectedPersonId }) {
     }
 
     useEffect(() => {
-        getAllPeople(`https://swapi.dev/api/people/`);
+        getAllPeople();
     }, []);
 
 
@@ -35,15 +33,14 @@ export default function ItemList({ selectedPersonId }) {
         return <Loading />
     };
 
-    console.log(peopleList, 'peopleList from state')
-
     const { data, ids } = peopleList;
 
     const handleClick = (id) => {
-        selectedPersonId(id)
+        selectedPersonId(id);
     }
+
     return (
-        <ul className="item-list ist-group">
+        <ul className="item-list list-group">
             {data.results.map((item, id) => {
                 return (
                     <li className="list-group-item" key={id} onClick={() => handleClick(ids[item.url.split('/').filter(Boolean).pop() - 1])}>

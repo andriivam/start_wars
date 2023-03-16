@@ -3,18 +3,12 @@ import './RandomPlanet.css';
 import Loader from '../Loader/Loader.jsx';
 import ErrorsIndicator from '../Errors/ErrorsIndicator.jsx';
 import PlanetView from './PlanetView';
-// import { getOnePlanet } from '../../apiClient.mjs';
-
 
 export default function RandomPlanet() {
 
     const [planet, setPlanet] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-
-    // console.log(error, 'error')
-
-    // console.log(loading, 'loading');
 
     const getOnePlanet = async () => {
         const id = Math.floor(Math.random() * 30) + 3;
@@ -54,7 +48,6 @@ export default function RandomPlanet() {
     const { data, id } = planet;
 
     return (
-
         <div className="random-planet jumbotron rounded">
             <PlanetView data={data} id={id} />
         </div>

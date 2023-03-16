@@ -1,13 +1,27 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { PersonContext } from '../context/PersonContext.jsx';
 import './PersonDetails.css';
+import Loading from '../Loader/Loader.jsx';
 
-export default function PersonDetails() {
+export default function PersonDetails({ selectedPerson }) {
+
+    const { person } = useContext(PersonContext);
+
+    if (!selectedPerson) {
+        return;
+    }
+
+    if (!person) {
+        return <Loading />
+    }
+    const { name, gender, birth_year, eye_color, height, mass } = person;
+
     return (
         <div className="person-details card">
-            <img className="person-image" src="" alt="" />
+            <img className="person-image" src={`https://starwars-visualguide.com/assets/img/characters/${selectedPerson}.jpg`} alt="hero" />
             <div className="card-body">
                 <h4>
-                    R2-D2
+                    {name} {selectedPerson}
                 </h4>
                 <ul className="list-group list-group-flush">
                     <li className="list-group-item">
@@ -15,7 +29,7 @@ export default function PersonDetails() {
                             Gender
                         </span>
                         <span>
-                            male
+                            {gender}
                         </span>
                     </li>
                     <li className="list-group-item">
@@ -23,7 +37,7 @@ export default function PersonDetails() {
                             Birth Year
                         </span>
                         <span>
-                            43
+                            {birth_year}
                         </span>
                     </li>
                     <li className="list-group-item">
@@ -31,7 +45,23 @@ export default function PersonDetails() {
                             Eye Color
                         </span>
                         <span>
-                            red
+                            {eye_color}
+                        </span>
+                    </li>
+                    <li className="list-group-item">
+                        <span className="term">
+                            Mass
+                        </span>
+                        <span>
+                            {mass}
+                        </span>
+                    </li>
+                    <li className="list-group-item">
+                        <span className="term">
+                            Height
+                        </span>
+                        <span>
+                            {height}
                         </span>
                     </li>
                 </ul>
