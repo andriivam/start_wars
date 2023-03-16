@@ -1,23 +1,31 @@
-import logo from './logo.svg';
+
+import React, { useState } from 'react';
 import './App.css';
+import Header from './Components/Header/Header';
+import RandomPlane from './Components/RandomPlanet/RandomPlanet';
+import ItemList from './Components/ItemList/ItemList';
+import PersonDetails from './Components/PersonDetails/PersonDetails';
 
 function App() {
+  const [selectedPerson, setSelectedPerson] = useState(null);
+
+  const selectedPersonId = (id) => {
+    setSelectedPerson(id);
+    console.log(id, 'id from app')
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Header />
+      <RandomPlane />
+      <div className="row mb2">
+        <div className="col-md-6">
+          <ItemList selectedPerson={selectedPersonId} />
+        </div>
+        <div className="col-md-6">
+          <PersonDetails selectedPerson={selectedPerson} />
+        </div>
+      </div>
     </div>
   );
 }
