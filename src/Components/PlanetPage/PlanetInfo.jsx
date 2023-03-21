@@ -1,24 +1,25 @@
 import React, { useContext } from 'react';
-import { PersonContext } from '../context/PersonContext.jsx';
-import './PersonDetails.css';
+import { PlanetContext } from '../context/PlanetContext.jsx';
+// import './PersonDetails.css';
 import Loading from '../Loader/Loader.jsx';
 
-export default function PersonDetails({ selectedPerson }) {
+export default function PlanetInfo({ selectedPlanet }) {
 
-    const { person } = useContext(PersonContext);
+    const { planet } = useContext(PlanetContext);
 
-    if (!selectedPerson) {
+    if (!selectedPlanet) {
         return;
     }
 
-    if (!person) {
+    if (!planet) {
         return <Loading />
     }
-    const { name, gender, birth_year, eye_color, height, mass } = person;
+
+    const { name, climate, diameter, population, gravity, rotation_period } = planet;
 
     return (
         <div className="person-details card">
-            <img className="person-image" src={`https://starwars-visualguide.com/assets/img/characters/${selectedPerson}.jpg`} alt="hero" />
+            <img className="person-image" src={`https://starwars-visualguide.com/assets/img/planets/${selectedPlanet}.jpg`} alt="hero" />
             <div className="card-body">
                 <h4>
                     {name}
@@ -26,42 +27,42 @@ export default function PersonDetails({ selectedPerson }) {
                 <ul className="list-group list-group-flush">
                     <li className="list-group-item">
                         <span className="term">
-                            Gender
+                            Climate
                         </span>
                         <span>
-                            {gender}
+                            {climate}
                         </span>
                     </li>
                     <li className="list-group-item">
                         <span className="term">
-                            Birth Year
+                            Diameter
                         </span>
                         <span>
-                            {birth_year}
+                            {diameter}
                         </span>
                     </li>
                     <li className="list-group-item">
                         <span className="term">
-                            Eye Color
+                            Population
                         </span>
                         <span>
-                            {eye_color}
+                            {population}
                         </span>
                     </li>
                     <li className="list-group-item">
                         <span className="term">
-                            Mass
+                            Gravity
                         </span>
                         <span>
-                            {mass}
+                            {gravity}
                         </span>
                     </li>
                     <li className="list-group-item">
                         <span className="term">
-                            Height
+                            Rotation Period
                         </span>
                         <span>
-                            {height}
+                            {rotation_period}
                         </span>
                     </li>
                 </ul>

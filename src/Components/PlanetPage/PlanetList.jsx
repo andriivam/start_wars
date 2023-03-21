@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import './ItemList.css';
+// import './ItemList.css';
 import Loading from '../Loader/Loader.jsx';
 
 
-export default function PlanetListList({ selectedPersonId }) {
+export default function ItemList({ selectedPlanetId }) {
 
-    const [peopleList, setPeopleList] = useState(null);
+    const [planetList, setPlanetList] = useState(null);
 
-    const getAllPeople = async () => {
+    const getAllPlanet = async () => {
         try {
-            const res = await fetch(`https://swapi.dev/api/people/`)
+            const res = await fetch(`https://swapi.dev/api/planets/`)
             const data = await res.json();
             const results = data.results;
             const ids = results.map((item) => {
                 const url = new URL(item.url);
                 return url.pathname.split('/').filter(Boolean).pop();
             });
-            setPeopleList({ data, ids });
+            setPlanetList({ data, ids });
             return data;
         }
         catch (error) {
@@ -25,17 +25,17 @@ export default function PlanetListList({ selectedPersonId }) {
     }
 
     useEffect(() => {
-        getAllPeople();
-    }, [selectedPersonId]);
+        getAllPlanet();
+    }, [selectedPlanetId]);
 
-    if (!peopleList) {
+    if (!planetList) {
         return <Loading />
     };
 
-    const { data, ids } = peopleList;
+    const { data, ids } = planetList;
 
     const handleClick = (id) => {
-        selectedPersonId(id);
+        selectedPlanetId(id);
     }
 
     return (

@@ -1,24 +1,24 @@
 import React, { useContext } from 'react';
-import { PersonContext } from '../context/PersonContext.jsx';
-import './PersonDetails.css';
+import { StarshipContext } from '../context/StarshipsContext.jsx';
 import Loading from '../Loader/Loader.jsx';
 
-export default function PersonDetails({ selectedPerson }) {
+export default function StarshipInfo({ selectedStarship }) {
 
-    const { person } = useContext(PersonContext);
+    const { starship } = useContext(StarshipContext);
 
-    if (!selectedPerson) {
+    if (!selectedStarship) {
         return;
     }
 
-    if (!person) {
+    if (!starship) {
         return <Loading />
     }
-    const { name, gender, birth_year, eye_color, height, mass } = person;
+
+    const { name, length, crew, passengers, starship_class, manufacturer } = starship;
 
     return (
         <div className="person-details card">
-            <img className="person-image" src={`https://starwars-visualguide.com/assets/img/characters/${selectedPerson}.jpg`} alt="hero" />
+            <img className="person-image" src={`https://starwars-visualguide.com/assets/img/starships/${selectedStarship}.jpg`} alt="hero" />
             <div className="card-body">
                 <h4>
                     {name}
@@ -26,42 +26,42 @@ export default function PersonDetails({ selectedPerson }) {
                 <ul className="list-group list-group-flush">
                     <li className="list-group-item">
                         <span className="term">
-                            Gender
+                            Length
                         </span>
                         <span>
-                            {gender}
+                            {length}
                         </span>
                     </li>
                     <li className="list-group-item">
                         <span className="term">
-                            Birth Year
+                            Crew
                         </span>
                         <span>
-                            {birth_year}
+                            {crew}
                         </span>
                     </li>
                     <li className="list-group-item">
                         <span className="term">
-                            Eye Color
+                            Passengers
                         </span>
                         <span>
-                            {eye_color}
+                            {passengers}
                         </span>
                     </li>
                     <li className="list-group-item">
                         <span className="term">
-                            Mass
+                            Starship Class
                         </span>
                         <span>
-                            {mass}
+                            {starship_class}
                         </span>
                     </li>
                     <li className="list-group-item">
                         <span className="term">
-                            Height
+                            Manufacturer
                         </span>
                         <span>
-                            {height}
+                            {manufacturer}
                         </span>
                     </li>
                 </ul>

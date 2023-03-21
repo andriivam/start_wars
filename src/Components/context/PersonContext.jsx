@@ -9,7 +9,6 @@ export const PersonProvider = ({ children, selectedPerson }) => {
         try {
             const res = await fetch(`https://swapi.dev/api/people/${id}/`)
             const data = await res.json();
-            console.log(data);
             setPerson(data);
             return data;
         }

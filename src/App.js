@@ -1,38 +1,27 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
-import Header from './Components/Header/Header';
-import RandomPlane from './Components/RandomPlanet/RandomPlanet';
-import ItemList from './Components/ItemList/ItemList';
-import PersonDetails from './Components/PersonDetails/PersonDetails';
-import { PersonProvider } from './Components/context/PersonContext';
-
+import HomePage from './Components/HomePage/HomePage';
+import PeoplePage from './Components/PeoplePage/PeoplePage';
+import PlanetPage from './Components/PlanetPage/PlanetPage';
+import StarshipPage from './Components/StarshipPage/StarshipPage';
+// import StarshipInfo from './Components/StarshipPage/StarshipInfo';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 function App() {
-  const [selectedPerson, setSelectedPerson] = useState(null);
-
-  const selectedPersonId = (id) => {
-    setSelectedPerson(id);
-  };
 
 
   return (
-    <PersonProvider selectedPerson={selectedPerson}>
-      <div>
-        <Header />
-        <RandomPlane />
-        <div className="row row mb2 button-row">
-          <button className="toggle-planet btn btn-warning btn-lg">Toggle Random Planet</button>
-        </div>
-        <div className="row mb2">
-          <div className="col-md-6">
-            <ItemList selectedPersonId={selectedPersonId} />
-          </div>
-          <div className="col-md-6">
-            <PersonDetails selectedPerson={selectedPerson} />
-          </div>
-        </div>
-      </div>
-    </PersonProvider>
+    <div>
+      <Router>
+        <HomePage />
+        <Routes>
+          <Route path='/' element={<h1>Welcome to the Star Wars DB</h1>} />
+          <Route path='/people' element={<PeoplePage />} />
+          <Route exact path='/starships' element={<StarshipPage />} />
+          <Route path='/planets' element={<PlanetPage />} />
+        </Routes>
+      </Router>
+    </div>
   );
 }
 
